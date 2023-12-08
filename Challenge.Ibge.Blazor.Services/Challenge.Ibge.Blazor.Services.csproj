@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Challenge.Ibge.Blazor.Domain\Challenge.Ibge.Blazor.Domain.csproj" />
+    <ProjectReference Include="..\Challenge.Ibge.Blazor.Infra\Challenge.Ibge.Blazor.Infra.csproj" />
+  </ItemGroup>
+
+</Project>
