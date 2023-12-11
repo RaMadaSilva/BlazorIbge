@@ -8,7 +8,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Challenge.Ibge.Blazor.Domain\Challenge.Ibge.Blazor.Domain.csproj" />
-    <ProjectReference Include="..\Challenge.Ibge.Blazor.Infra\Challenge.Ibge.Blazor.Infra.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Dtos\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="Mappings\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Server;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
-using Challenge.Ibge.Blazor.Presentation.Data;
+using Challenge.Ibge.Blazor.Infra.Data;
 
 namespace Challenge.Ibge.Blazor.Presentation.Components.Account;
 

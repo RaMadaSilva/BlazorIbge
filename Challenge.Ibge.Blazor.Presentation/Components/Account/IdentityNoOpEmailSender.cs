@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
-using Challenge.Ibge.Blazor.Presentation.Data;
+using Challenge.Ibge.Blazor.Infra.Data;
 
 namespace Challenge.Ibge.Blazor.Presentation.Components.Account;
 

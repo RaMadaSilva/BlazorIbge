@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
 using Challenge.Ibge.Blazor.Presentation.Components.Account.Pages;
 using Challenge.Ibge.Blazor.Presentation.Components.Account.Pages.Manage;
-using Challenge.Ibge.Blazor.Presentation.Data;
+using Challenge.Ibge.Blazor.Infra.Data;
 
 namespace Microsoft.AspNetCore.Routing;
 
