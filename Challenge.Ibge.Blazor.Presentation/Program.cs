@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Challenge.Ibge.Blazor.Presentation.Components;
 using Challenge.Ibge.Blazor.Presentation.Components.Account;
 using Challenge.Ibge.Blazor.Presentation.Data;
+using Microsoft.Extensions.Configuration;
+using Challenge.Ibge.Blazor.Domain.Model;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,7 +27,8 @@ builder.Services.AddAuthentication(options =>
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlite(connectionString));
+    options.UseSqlServer(connectionString));
+
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddIdentityCore<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)

@@ -1,0 +1,55 @@
+﻿@page "/locality"
+@inject ApplicationDbContext Context
+@attribute [StreamRendering(true)]
+@attribute [Authorize]
+
+<h1> Locality </h1>
+<a href="/locality/create" class="btn btn-primary"> New Locality </a>
+
+@if (!Locations.Any())
+{
+    <p class="text-center"> Loading Locations </p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Acronym of State</th>
+                <th>Name of City</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Locality in Locations)
+            {
+                <tr>
+                    <td>@Locality.Idlocality</td>
+                    <td>@Locality.State</td>
+                    <td>@Locality.City</td>
+                    <td>
+                        <a href="/categories/edit/@Locality.Idlocality" class="btn btn-primary">
+                            Edit
+                        </a>
+                        &nbsp;
+                        <a href="/categories/delete/@Locality.Idlocality" class="btn btn-danger">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    public IEnumerable<Locality> Locations { get; set; } = Enumerable.Empty<Locality>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Locations = await Context.Localities.AsNoTracking().OrderByDescending(x=> x.DateCreate).ToListAsync();
+    }
+}
+
