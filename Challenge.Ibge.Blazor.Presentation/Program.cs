@@ -10,6 +10,8 @@ builder.Services.AddDatabase(builder.Configuration);
 
 builder.Services.AddIdentity();
 
+builder.Services.AddDependenceInjection(); 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

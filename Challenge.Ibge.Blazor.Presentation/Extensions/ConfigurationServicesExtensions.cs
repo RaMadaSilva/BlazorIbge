@@ -1,4 +1,8 @@
-﻿using Challenge.Ibge.Blazor.Infra.Data;
+﻿using Challenge.Ibge.Blazor.Applications.Interfaces;
+using Challenge.Ibge.Blazor.Applications.Services;
+using Challenge.Ibge.Blazor.Domain.Interfaces;
+using Challenge.Ibge.Blazor.Infra.Data;
+using Challenge.Ibge.Blazor.Infra.Repositories;
 using Challenge.Ibge.Blazor.Presentation.Components.Account;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -49,6 +53,14 @@ namespace Challenge.Ibge.Blazor.Presentation.Extensions
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             return services;
+        }
+
+        public static IServiceCollection AddDependenceInjection(this IServiceCollection services)
+        {
+            services.AddScoped<ILocalityService, LocalityService>();
+            services.AddScoped<ILocalityRepository, LocalityRepository>(); 
+
+            return services; 
         }
     }
 }
