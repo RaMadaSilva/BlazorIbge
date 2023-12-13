@@ -1,0 +1,53 @@
+﻿@page "/locality"
+@inject ILocalityService Service
+@attribute [StreamRendering(true)]
+
+<h3>Localities</h3>
+
+@if (!localityViewModels.Any())
+{
+    <p class="text-center"> Loading Locations... </p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Acronym of State</th>
+                <th>Name of City</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Locality in localityViewModels)
+            {
+                <tr>
+                    <td>@Locality.Id</td>
+                    <td>@Locality.State</td>
+                    <td>@Locality.City</td>
+                    <td>
+                        <a href="/categories/edit/@Locality.Id" class="btn btn-primary">
+                            Edit
+                        </a>
+                        &nbsp;
+                        <a href="/categories/delete/@Locality.Id" class="btn btn-danger">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+
+    public IEnumerable<LocalityViewModel> localityViewModels { get; set; } = Enumerable.Empty<LocalityViewModel>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        localityViewModels = await Service.GetAsync(); 
+    }
+}

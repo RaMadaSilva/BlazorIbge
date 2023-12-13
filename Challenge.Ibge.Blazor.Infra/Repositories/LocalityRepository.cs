@@ -1,6 +1,7 @@
 ﻿using Challenge.Ibge.Blazor.Domain.Entities;
 using Challenge.Ibge.Blazor.Domain.Interfaces;
 using Challenge.Ibge.Blazor.Infra.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Challenge.Ibge.Blazor.Infra.Repositories
 {
@@ -16,6 +17,11 @@ namespace Challenge.Ibge.Blazor.Infra.Repositories
         {
             await _context.Localities.AddAsync(locality);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<Locality>> GetAllAsync()
+        {
+           return  await _context.Localities.AsNoTracking().ToListAsync();
         }
     }
 }

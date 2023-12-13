@@ -4,6 +4,7 @@ namespace Challenge.Ibge.Blazor.Domain.Interfaces
 {
     public interface ILocalityRepository
     {
-        Task CreateAsync(Locality locality); 
+        Task CreateAsync(Locality locality);
+        Task<IEnumerable<Locality>> GetAllAsync();
     }
 }
