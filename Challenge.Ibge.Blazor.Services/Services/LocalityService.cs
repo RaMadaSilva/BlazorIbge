@@ -8,9 +8,10 @@ namespace Challenge.Ibge.Blazor.Applications.Services
     public class LocalityService : ILocalityService
     {
         private readonly ILocalityRepository _repository;
+        private readonly ILocalityRemovedRepository _removedRepository;
 
-        public LocalityService(ILocalityRepository repository)
-            =>_repository = repository;
+        public LocalityService(ILocalityRepository repository, ILocalityRemovedRepository removedRepository)
+            => (_repository, _removedRepository) = (repository, removedRepository);
 
         public async Task<IEnumerable<LocalityViewModel>> GetAsync()
         {
@@ -22,6 +23,21 @@ namespace Challenge.Ibge.Blazor.Applications.Services
         public async Task SaveAsync(LocalityViewModel viewModel)
         {
             await _repository.CreateAsync(viewModel);
+        }
+
+        public async Task RemoveAsync(long id)
+        {
+            var locality = await _repository.GetByIdAsync(id);
+
+            if (locality is null)
+                throw new Exception("Não existe essa localidade");
+
+           var isSucess=  await _removedRepository
+                                .CreateAsync(new(locality.Id, locality.City, locality.State, locality.DateCreate));
+            if (!isSucess)
+                throw new Exception("Não é possivel Remover essa Localidade!");
+
+           await _repository.RemoveAsync(locality);
         }
     }
 }
