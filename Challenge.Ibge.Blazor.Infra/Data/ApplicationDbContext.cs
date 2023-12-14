@@ -12,6 +12,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
     }
     public DbSet<Locality> Localities { get; set; } = null!;
+    public DbSet<LocalityRemoved> LocalityRemoveds { get; set; } = null!; 
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
