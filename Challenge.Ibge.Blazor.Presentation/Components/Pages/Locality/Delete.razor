@@ -1,0 +1,50 @@
+﻿@page "/locality/delete/{id:long}"
+@rendermode InteractiveServer
+@inject ILocalityService Service
+@inject NavigationManager Navigation
+
+
+<h2>Delete Locality</h2>
+<br/>
+<div class="form-control mb-3">
+    <EditForm Model="@Model" OnValidSubmit="OnDeleteAsync">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <label class="form-label">Id</label>
+        <InputNumber @bind-Value = "Model.Id" class="form-control" readonly/>
+        <label class="form-label">City</label>
+        <InputText @bind-Value="Model.City" class="form-control" readonly />
+        <label class="form-label">State</label>
+        <InputText @bind-Value="Model.State" class="form-control" readonly />
+        <br/>
+        <div>
+            <button type="submit" class="btn btn-danger">
+                <span class="bi bi-trash3"></span>
+                Excluir
+            </button>
+            &nbsp;
+            <a href="/locality" class="btn btn-link">Cancelar</a>
+        </div>
+        
+        
+    </EditForm>
+
+</div>
+
+@code {
+
+    [Parameter]
+    public long Id { get; set; }
+
+    public LocalityViewModel Model { get; set; } = new(); 
+
+    protected override async Task OnInitializedAsync()
+    {
+        Model = await Service.GetbyId(Id); 
+    }
+    private async Task OnDeleteAsync()
+    {
+        await Service.RemoveAsync(Model.Id);
+        Navigation.NavigateTo("/locality");
+    }
+}

@@ -11,13 +11,17 @@ namespace Challenge.Ibge.Blazor.Applications.Services
         private readonly ILocalityRemovedRepository _removedRepository;
 
         public LocalityService(ILocalityRepository repository, ILocalityRemovedRepository removedRepository)
-            => (_repository, _removedRepository) = (repository, removedRepository);
+            =>(_repository, _removedRepository) = (repository, removedRepository);
 
         public async Task<IEnumerable<LocalityViewModel>> GetAsync()
         {
            var result =  await _repository.GetAllAsync();
 
             return result.ToListViewModel(); 
+        }
+        public async Task<LocalityViewModel> GetbyId(long id)
+        {
+            return await _repository.GetByIdAsync(id);
         }
 
         public async Task SaveAsync(LocalityViewModel viewModel)

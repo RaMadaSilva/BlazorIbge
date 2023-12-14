@@ -6,6 +6,8 @@ namespace Challenge.Ibge.Blazor.Applications.Interfaces
     {
         Task SaveAsync(LocalityViewModel localityVm);
         Task<IEnumerable<LocalityViewModel>> GetAsync();
+
+        Task<LocalityViewModel> GetbyId(long id);
         Task RemoveAsync(long id);  
     }
 }
