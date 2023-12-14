@@ -6,5 +6,7 @@ namespace Challenge.Ibge.Blazor.Domain.Interfaces
     {
         Task CreateAsync(Locality locality);
         Task<IEnumerable<Locality>> GetAllAsync();
+        Task RemoveAsync(Locality locality);
+
     }
 }

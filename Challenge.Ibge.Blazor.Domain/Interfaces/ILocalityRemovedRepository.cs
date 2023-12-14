@@ -4,6 +4,6 @@ namespace Challenge.Ibge.Blazor.Domain.Interfaces
 {
     public interface ILocalityRemovedRepository
     {
-        Task<bool> Create(LocalityRemoved removed); 
+        Task<bool> CreateAsync(LocalityRemoved removed); 
     }
 }
