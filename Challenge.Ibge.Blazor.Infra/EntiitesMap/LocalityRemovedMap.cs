@@ -15,7 +15,8 @@ namespace Challenge.Ibge.Blazor.Infra.EntiitesMap
             builder.Property(property => property.Id)
                 .IsRequired()
                 .HasColumnName("Id")
-                .HasColumnType("BIGINT");
+                .HasColumnType("BIGINT")
+                .ValueGeneratedNever();
 
             builder.Property(property => property.City)
                 .IsRequired()
