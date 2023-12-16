@@ -4,6 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Challenge.Ibge.Blazor.Presentation.Components;
 using Challenge.Ibge.Blazor.Presentation.Components.Account;
 using Challenge.Ibge.Blazor.Presentation.Data;
+using Challenge.Ibge.Blazor.Services.Interfaces;
+using Challenge.Ibge.Blazor.Infra.Data.Context;
+using Challenge.Ibge.Blazor.Infra.Data.Interfaces;
+using Challenge.Ibge.Blazor.Infra.Data.Repositories;
+using Challenge.Ibge.Blazor.Service.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,8 +29,10 @@ builder.Services.AddAuthentication(options =>
     .AddIdentityCookies();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlite(connectionString));
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
+connectionString = builder.Configuration.GetConnectionString("IbgeConnection") ?? throw new InvalidOperationException("Connection string 'IbgeConnection' not found.");
+builder.Services.AddDbContext<IbgeDbContext>(options => options.UseSqlServer(connectionString));
+
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddIdentityCore<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
@@ -34,6 +41,8 @@ builder.Services.AddIdentityCore<ApplicationUser>(options => options.SignIn.Requ
     .AddDefaultTokenProviders();
 
 builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSender>();
+builder.Services.AddScoped<IIbgeRepository, IbgeRepository>();
+builder.Services.AddScoped<IIbgeService, IbgeService>();
 
 var app = builder.Build();
 

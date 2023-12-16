@@ -1,0 +1,75 @@
+﻿@page "/"
+
+@using Challenge.Ibge.Blazor.Service.Dtos
+@using Challenge.Ibge.Blazor.Services.Interfaces
+@using Challenge.Ibge.Blazor.Service.Results
+
+@inject IIbgeService IbgeService
+
+<PageTitle>Home</PageTitle>
+
+<h3>Ibge List</h3>
+<div class="dropdown">
+    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Search
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="#">By city</a>
+        <a class="dropdown-item" href="#">By state</a>
+        <a class="dropdown-item" href="#">By id</a>
+    </div>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">State</th>
+            <th scope="col">City</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var ibge in ibges)
+        {
+            <tr>
+                <td>@ibge.Id</td>
+                <td>@ibge.State</td>
+                <td>@ibge.City</td>
+                <td>
+                    <a href="#" class="link-primary">Edit</a> | <a href="#" class="link-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="#" class="btn btn-primary m-1">Create</a>
+
+@code {
+    @* private IEnumerable<IbgeDto> ibges = new List<IbgeDto>(); *@
+    private IEnumerable<IbgeDto> ibges = new List<IbgeDto>();
+    private Result result = new Result();
+
+    @* private void LoadIbges()
+    {
+        ibges =  new List<IbgeDto>
+        {
+            new IbgeDto { Id = "1100015", State = "RO", City = "Alta Floresta D'Oeste" },
+            new IbgeDto { Id = "1100023", State = "RO", City = "Ariquemes" },
+            new IbgeDto { Id = "1100031", State = "RO", City = "Cabixi" }
+        };
+    } *@
+
+    @* protected override Task OnInitializedAsync()
+    {
+         LoadIbges(); 
+        return base.OnInitializedAsync();
+    } *@
+
+    protected override async Task OnInitializedAsync()
+    {
+        result = await Task.Run(IbgeService.GetIbges);
+        ibges = (List<IbgeDto>)result.Data;
+    }
+}

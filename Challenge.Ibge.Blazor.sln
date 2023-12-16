@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Challenge.Ibge.Blazor.Infra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Challenge.Ibge.Blazor.Presentation", "Challenge.Ibge.Blazor.Presentation\Challenge.Ibge.Blazor.Presentation.csproj", "{88D4C777-82B9-481C-A66B-F16D5F562EFE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Challenge.Ibge.Blazor.Services", "Challenge.Ibge.Blazor.Services\Challenge.Ibge.Blazor.Services.csproj", "{73C5CDCF-EEBD-42E1-8E5B-82E8FBA7F8F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Challenge.Ibge.Blazor.Service", "Challenge.Ibge.Blazor.Services\Challenge.Ibge.Blazor.Service.csproj", "{73C5CDCF-EEBD-42E1-8E5B-82E8FBA7F8F2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

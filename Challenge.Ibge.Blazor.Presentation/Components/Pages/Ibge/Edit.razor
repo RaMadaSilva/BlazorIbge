@@ -1,0 +1,52 @@
+﻿@page "/edit-ibge/{id:int}"
+
+@using System.Linq
+@using Challenge.Ibge.Blazor.Service.Dtos
+@using Challenge.Ibge.Blazor.Services.Interfaces
+
+@inject IIbgeService IbgeService
+
+<PageTitle>Edit Ibge</PageTitle>
+
+<h3>Edit Ibge</h3>
+
+<EditForm Model="@Ibge" OnValidSubmit="@Submit" FormName="Edit" class="col-5 p-0">
+    <div>
+        <label for="id">Id:</label>
+        <InputText id="id" @bind-Value="@Ibge.Id" class="form-control" placeholder="Enter the ibge Id..."></InputText>
+    </div>
+    <br/>
+
+    <div class="form-group">
+        <label for="state">State:</label>
+        <InputText id="state" @bind-Value="@Ibge.State" class="form-control" placeholder="Enter the ibge state..."></InputText>
+    </div>
+    <br/>
+
+    <div class="form-group">
+        <label for="city">City:</label>
+        <InputText id="city" @bind-Value="@Ibge.City" class="form-control" placeholder="Enter the ibge city..."></InputText>
+    </div>
+    <br/>
+
+    <div class="form-group">
+        <input type="submit" value="Submit" class="btn btn-primary"/>
+    </div>
+</EditForm>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    [SupplyParameterFromForm]
+    public IbgeDto Ibge { get; set; } = new();
+
+    private void Submit()
+    {
+        IbgeService.UpdateIbge(Id, Ibge);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+    }
+}

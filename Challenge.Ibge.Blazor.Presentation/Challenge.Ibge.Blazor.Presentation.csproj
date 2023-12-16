@@ -16,10 +16,15 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0" />
+    <PackageReference Include="System.Linq" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Challenge.Ibge.Blazor.Services\Challenge.Ibge.Blazor.Services.csproj" />
+    <ProjectReference Include="..\Challenge.Ibge.Blazor.Services\Challenge.Ibge.Blazor.Service.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Components\Pages\Ibge\" />
   </ItemGroup>
 
 </Project>
