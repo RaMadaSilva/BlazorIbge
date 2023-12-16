@@ -19,7 +19,7 @@ namespace Challenge.Ibge.Blazor.Applications.Services
 
             return result.ToListViewModel(); 
         }
-        public async Task<LocalityViewModel> GetbyId(long id)
+        public async Task<LocalityViewModel> GetbyIdAsync(long id)
         {
             return await _repository.GetByIdAsync(id);
         }

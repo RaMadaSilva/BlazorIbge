@@ -12,7 +12,7 @@ namespace Challenge.Ibge.Blazor.Presentation.ViewModel
         public string State { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "City is required")]
-        [MinLength(3, ErrorMessage = "The City must be at least 3 characters long")]
+        [MinLength(2, ErrorMessage = "The City must be at least 3 characters long")]
         [MaxLength(60, ErrorMessage = "The City must be at least 60 characters long")]
         public string City { get; set; } = string.Empty;
 

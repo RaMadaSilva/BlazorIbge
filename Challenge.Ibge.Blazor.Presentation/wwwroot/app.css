@@ -64,3 +64,9 @@ h1:focus {
     max-width: 50%; 
     max-height: 50%; 
 }
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
