@@ -1,0 +1,34 @@
+﻿<div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+    <div class="btn-group" role="group" aria-label="First group">
+        <button type="button" class="btn btn-secondary" disabled="@(CurrentPage==1)" @onclick="@(()=>ChangePage(CurrentPage-1))">
+            Previous
+        </button>
+        @foreach (var i in Enumerable.Range(1, NumberPages))
+        {
+            Console.WriteLine($"valor de i: {i}");
+            <button class="@(CurrentPage==i? "selected":"") btn btn-secondary" @onclick="@(()=>ChangePage(i))">
+                @i
+            </button>
+        }
+        <button type="button" class="btn btn-secondary" disabled="@(CurrentPage==NumberPages)" @onclick="@(()=>ChangePage(CurrentPage +1))">
+            Next
+        </button>
+    </div>
+    <form class="row row-cols-lg-auto g-3 align-items-center">
+        <div class="col-12">
+            <label class="visually-hidden" for="inlineFormInputGroupUsername">Username</label>
+            <div class="input-group">
+                <div class="input-group-text">Items Per Page</div>
+                <select type="text" class="form-control" id="inlineFormInputGroupUsername" @onchange="e =>ChangeItemsPerPage(Convert.ToInt32(e.Value))">
+                    @for (var i = 10; i <= 50; i += 10)
+                    {
+                        <option value="@i">@i</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </form>
+</div>
+<br/>
+<h5>Total Items: @TotalItems</h5>
+

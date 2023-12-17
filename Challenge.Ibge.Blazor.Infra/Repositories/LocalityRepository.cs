@@ -23,5 +23,16 @@ namespace Challenge.Ibge.Blazor.Infra.Repositories
         {
            return  await _context.Localities.AsNoTracking().ToListAsync();
         }
+
+        public async Task<Locality> GetByIdAsync(long id)
+        {
+           return await _context.Localities.FirstOrDefaultAsync(x=> x.Id == id);   
+        }
+
+        public async Task RemoveAsync(Locality locality)
+        {
+            _context.Localities.Remove(locality);
+            await _context.SaveChangesAsync();
+        }
     }
 }

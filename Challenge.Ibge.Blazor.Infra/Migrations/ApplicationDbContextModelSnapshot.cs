@@ -54,6 +54,39 @@ namespace Challenge.Ibge.Blazor.Infra.Migrations
                     b.ToTable("LocalityIBGE", (string)null);
                 });
 
+            modelBuilder.Entity("Challenge.Ibge.Blazor.Domain.Entities.LocalityRemoved", b =>
+                {
+                    b.Property<long>("Id")
+                        .HasColumnType("BIGINT")
+                        .HasColumnName("Id");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("NVARCHAR")
+                        .HasColumnName("City");
+
+                    b.Property<DateTime>("DateCreate")
+                        .HasColumnType("DateTime2")
+                        .HasColumnName("DateCreate");
+
+                    b.Property<DateTime>("DateRemoved")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("DateTime2")
+                        .HasColumnName("DateRemoved")
+                        .HasDefaultValueSql("GETDATE()");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasMaxLength(5)
+                        .HasColumnType("NVARCHAR")
+                        .HasColumnName("State");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("LocalityIBGERemoved", (string)null);
+                });
+
             modelBuilder.Entity("Challenge.Ibge.Blazor.Infra.Data.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")

@@ -59,6 +59,7 @@ namespace Challenge.Ibge.Blazor.Presentation.Extensions
         {
             services.AddScoped<ILocalityService, LocalityService>();
             services.AddScoped<ILocalityRepository, LocalityRepository>(); 
+            services.AddScoped<ILocalityRemovedRepository, LocalityRemovedRepository>();
 
             return services; 
         }

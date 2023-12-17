@@ -5,7 +5,7 @@
         public Locality(string city, string state)
         {
             City = city;
-            State = state;
+            State = state.ToUpper();
             DateCreate = DateTime.Now;
         }
 

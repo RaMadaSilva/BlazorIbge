@@ -66,6 +66,21 @@ namespace Challenge.Ibge.Blazor.Infra.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "LocalityIBGERemoved",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "BIGINT", nullable: false),
+                    City = table.Column<string>(type: "NVARCHAR(500)", maxLength: 500, nullable: false),
+                    State = table.Column<string>(type: "NVARCHAR(5)", maxLength: 5, nullable: false),
+                    DateCreate = table.Column<DateTime>(type: "DateTime2", nullable: false),
+                    DateRemoved = table.Column<DateTime>(type: "DateTime2", nullable: false, defaultValueSql: "GETDATE()")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LocalityIBGERemoved", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -231,6 +246,9 @@ namespace Challenge.Ibge.Blazor.Infra.Migrations
 
             migrationBuilder.DropTable(
                 name: "LocalityIBGE");
+
+            migrationBuilder.DropTable(
+                name: "LocalityIBGERemoved");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
