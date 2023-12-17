@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Challenge.Ibge.Blazor.Prese
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Challenge.Ibge.Blazor.Service", "Challenge.Ibge.Blazor.Services\Challenge.Ibge.Blazor.Service.csproj", "{73C5CDCF-EEBD-42E1-8E5B-82E8FBA7F8F2}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Challenge.Ibge.Blazor.Applications", "Challenge.Ibge.Blazor.Services\Challenge.Ibge.Blazor.Applications.csproj", "{F3A8F74D-5FCF-4539-BE12-3ADCCA1EDE99}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{73C5CDCF-EEBD-42E1-8E5B-82E8FBA7F8F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73C5CDCF-EEBD-42E1-8E5B-82E8FBA7F8F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73C5CDCF-EEBD-42E1-8E5B-82E8FBA7F8F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3A8F74D-5FCF-4539-BE12-3ADCCA1EDE99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3A8F74D-5FCF-4539-BE12-3ADCCA1EDE99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3A8F74D-5FCF-4539-BE12-3ADCCA1EDE99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3A8F74D-5FCF-4539-BE12-3ADCCA1EDE99}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
