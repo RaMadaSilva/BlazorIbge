@@ -11,13 +11,13 @@ namespace Challenge.Ibge.Blazor.Applications.Services
         private readonly ILocalityRemovedRepository _removedRepository;
 
         public LocalityService(ILocalityRepository repository, ILocalityRemovedRepository removedRepository)
-            =>(_repository, _removedRepository) = (repository, removedRepository);
+            => (_repository, _removedRepository) = (repository, removedRepository);
 
         public async Task<IEnumerable<LocalityViewModel>> GetAsync()
         {
-           var result =  await _repository.GetAllAsync();
+            var result = await _repository.GetAllAsync();
 
-            return result.ToListViewModel(); 
+            return result.ToListViewModel();
         }
         public async Task<LocalityViewModel> GetbyIdAsync(long id)
         {
@@ -36,12 +36,45 @@ namespace Challenge.Ibge.Blazor.Applications.Services
             if (locality is null)
                 throw new Exception("Não existe essa localidade");
 
-           var isSucess=  await _removedRepository
-                                .CreateAsync(new(locality.Id, locality.City, locality.State, locality.DateCreate));
+            var isSucess = await _removedRepository
+                                 .CreateAsync(new(locality.Id, locality.City, locality.State, locality.DateCreate));
             if (!isSucess)
                 throw new Exception("Não é possivel Remover essa Localidade!");
 
-           await _repository.RemoveAsync(locality);
+            await _repository.RemoveAsync(locality);
+        }
+
+        public async Task UpdateLocalityAsync(LocalityViewModel viewModel)
+        {
+            var locationsBd = await _repository.GetByIdAsync(viewModel.Id);
+            if (locationsBd is not null)
+            {
+                locationsBd.UpdateLocality(viewModel.City, viewModel.State);
+                await _repository.UpdateAsync(locationsBd); 
+            }
+        }
+        public async Task<IEnumerable<LocalityViewModel>> GetLocalityByCityAsync(string city)
+        {
+
+                var localities =  await _repository.GetByCityAsync(city);
+                if (localities.Any())
+                {
+                    return localities.ToListViewModel(); 
+                }
+                return Enumerable.Empty<LocalityViewModel>();
+        }
+
+        public async Task<IEnumerable<LocalityViewModel>> GetILocalityByStateAsync(string state)
+        {
+                var localities = await _repository.GetByStateAsync(state);
+
+                if (localities.Any())
+                {
+                    return localities.ToListViewModel().ToList(); 
+                }
+
+                return Enumerable.Empty<LocalityViewModel>();
         }
     }
 }
+

@@ -13,5 +13,11 @@
         public string City { get; private set; }
         public string State { get; private set; }
         public DateTime DateCreate { get;  private set; }
+
+        public void  UpdateLocality(string city, string state)
+        {
+            City = city;
+            State = state.ToUpper(); 
+        }
     }
 }

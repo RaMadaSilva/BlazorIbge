@@ -5,7 +5,6 @@
         </button>
         @foreach (var i in Enumerable.Range(1, NumberPages))
         {
-            Console.WriteLine($"valor de i: {i}");
             <button class="@(CurrentPage==i? "selected":"") btn btn-secondary" @onclick="@(()=>ChangePage(i))">
                 @i
             </button>
