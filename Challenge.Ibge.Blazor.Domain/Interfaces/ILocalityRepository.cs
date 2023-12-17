@@ -8,10 +8,9 @@ namespace Challenge.Ibge.Blazor.Domain.Interfaces
         Task<IEnumerable<Locality>> GetAllAsync();
         Task<Locality> GetByIdAsync(long id);
         Task RemoveAsync(Locality locality);
-        Task<Locality?> UpdateIbge(Locality locality); 
-        Task<IEnumerable<Locality?>> GetIbgeByCity(string city);
-        Task<IEnumerable<Locality?>> GetIbgeByState(string state);
-        Task<Locality?> GetIbgeById(string id);
+        Task<Locality?> UpdateAsync(Locality locality); 
+        Task<IEnumerable<Locality?>> GetByCityAsync(string city);
+        Task<IEnumerable<Locality?>> GetByStateAsync(string state);
 
     }
 }

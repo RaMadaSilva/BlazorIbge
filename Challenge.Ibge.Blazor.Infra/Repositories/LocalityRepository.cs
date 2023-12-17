@@ -35,7 +35,7 @@ namespace Challenge.Ibge.Blazor.Infra.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Locality?> UpdateIbge(Locality locality)
+        public async Task<Locality?> UpdateAsync(Locality locality)
         {
             var result = await _context.Localities.FirstAsync(x => x.Id == locality.Id);
             if (result is null)
@@ -48,7 +48,7 @@ namespace Challenge.Ibge.Blazor.Infra.Repositories
             return result;
         }
 
-        public async Task<IEnumerable<Locality?>> GetIbgeByCity(string city)
+        public async Task<IEnumerable<Locality?>> GetByCityAsync(string city)
         {
             IQueryable<Locality> query = _context.Localities;
             if (String.IsNullOrEmpty(city))
@@ -57,7 +57,7 @@ namespace Challenge.Ibge.Blazor.Infra.Repositories
             return await query.ToListAsync();
         }
 
-        public async Task<IEnumerable<Locality?>> GetIbgeByState(string state)
+        public async Task<IEnumerable<Locality?>> GetByStateAsync(string state)
         {
             IQueryable<Locality> query = _context.Localities;
             if (String.IsNullOrEmpty(state))
@@ -66,7 +66,7 @@ namespace Challenge.Ibge.Blazor.Infra.Repositories
             return await query.ToListAsync();
         }
 
-        public async Task<Locality?> GetIbgeById(string id)
+        public async Task<Locality?> GetByIdAsync(string id)
         {
             if (String.IsNullOrEmpty(id))
                 return null;

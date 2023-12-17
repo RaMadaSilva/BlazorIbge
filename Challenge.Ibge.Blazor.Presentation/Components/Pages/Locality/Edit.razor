@@ -1,0 +1,55 @@
+﻿@page "/locality/edit/{id:long}"
+@inject ILocalityService Service
+@inject NavigationManager Navigation
+@rendermode InteractiveServer
+
+<h3>Edit Locality</h3>
+
+<div class="form-control mb-3">
+    <EditForm Model="@Model" OnValidSubmit="OnValidEditAsync">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="mb-3">
+            <label class="form-label">Id</label>
+            <InputNumber @bind-Value="Model.Id" class="form-control" readonly />
+            <ValidationMessage For="@(()=>Model.Id)" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">State</label>
+            <InputText @bind-Value="Model.State" class="form-control" />
+            <ValidationMessage For="@(()=>Model.State)" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">City</label>
+            <InputText @bind-Value="Model.City" class="form-control" />
+            <ValidationMessage For="@(()=>Model.City)" />
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary">
+                <span class="bi bi-floppy2-fill"></span> Save
+            </button>
+            <a class="btn btn-link" href="/locality"> Cancel </a>
+        </div>
+    </EditForm>
+</div>
+
+
+@code {
+
+    [Parameter]
+    public long Id { get; set; }
+
+    public LocalityViewModel Model { get; set; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Model = await Service.GetbyIdAsync(Id);
+    }
+    private async Task OnValidEditAsync()
+    {
+        await Service.UpdateLocalityAsync(Model);
+        Navigation.NavigateTo("/locality");
+    }
+
+}
