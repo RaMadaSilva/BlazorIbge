@@ -1,6 +1,7 @@
 ﻿@page "/locality"
 @inject ILocalityService Service
 @inject AuthenticationStateProvider AuthenticationStateProvider
+@rendermode InteractiveServer
 @attribute [StreamRendering(true)]
 
 <h3>Localities</h3>
@@ -24,13 +25,27 @@ else
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Acronym of State</th>
-                <th>Name of City</th>
+                <th>State</th>
+                <th>City</th>
                 <th></th>
+            </tr>
+            <tr>
+
+                <th>
+                    <InputNumber class="form-control" @bind-Value="id" />
+                </th>
+                <th>
+                    <InputText class="form-control" @bind-Value="state" />
+                </th>
+                <th>
+                    <InputText class="form-control" @bind-Value="city" />
+                </th>
+                <th>
+                </th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var Locality in localityViewModels)
+            @foreach (var Locality in GetLocalityPaginated())
             {
                 <tr>
                     <td>@Locality.Id</td>
@@ -59,19 +74,12 @@ else
             }
         </tbody>
     </table>
-}
-
-@code {
-
-    private bool IsAutenticated; 
-
-    public IEnumerable<LocalityViewModel> localityViewModels { get; set; } = Enumerable.Empty<LocalityViewModel>();
-
-    protected override async Task OnInitializedAsync()
-    {
-        var authSate =  await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        IsAutenticated = authSate.User.Identity.IsAuthenticated; 
-
-        localityViewModels = await Service.GetAsync();
-    }
+    <div>
+        <PaginationComponent 
+            CurrentPage="@currentPage"
+            ItemsPerPage="@itemPerPage"
+            ItemsPerPageChanged="@HandlerItemsPerPageChenged"
+            PageChanged="@HandlerPageChanged"
+            TotalItems="@localityViewModels.Count()"/>
+    </div>
 }
