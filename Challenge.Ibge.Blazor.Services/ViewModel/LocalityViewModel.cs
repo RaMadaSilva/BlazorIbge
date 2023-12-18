@@ -1,7 +1,7 @@
 ﻿using Challenge.Ibge.Blazor.Domain.Entities;
 using System.ComponentModel.DataAnnotations;
 
-namespace Challenge.Ibge.Blazor.Presentation.ViewModel
+namespace Challenge.Ibge.Blazor.Applications.ViewModel
 {
     public class LocalityViewModel
     {

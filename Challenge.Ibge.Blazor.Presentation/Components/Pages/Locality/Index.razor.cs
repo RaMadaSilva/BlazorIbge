@@ -1,4 +1,4 @@
-﻿using Challenge.Ibge.Blazor.Presentation.ViewModel;
+﻿using Challenge.Ibge.Blazor.Applications.ViewModel;
 using Microsoft.AspNetCore.Components;
 
 namespace Challenge.Ibge.Blazor.Presentation.Components.Pages.Locality
@@ -9,9 +9,7 @@ namespace Challenge.Ibge.Blazor.Presentation.Components.Pages.Locality
         private int currentPage = 1;
         private int itemPerPage = 10;
 
-        private long id;
-        private string? state;
-        private string? city;
+        private SearchViewModel search = new();
 
         public IEnumerable<LocalityViewModel> localityViewModels { get; set; } = Enumerable.Empty<LocalityViewModel>();
 
@@ -27,12 +25,39 @@ namespace Challenge.Ibge.Blazor.Presentation.Components.Pages.Locality
         {
             int start = (currentPage - 1) * itemPerPage;
 
-            return localityViewModels.Skip(start).Take(itemPerPage).ToList(); 
+            return localityViewModels.Skip(start).Take(itemPerPage).ToList();
         }
 
         private void HandlerPageChanged(int newPage) => currentPage = newPage;
 
         private void HandlerItemsPerPageChenged(int newItemsPerPage) => itemPerPage = newItemsPerPage;
 
+        private async Task SearchAsync()
+        {
+            if (search.SearchType == Domain.Enums.ESearcType.Code)
+            {
+                long result;
+
+                if (long.TryParse(search.Search, out result))
+                {
+                    localityViewModels = new List<LocalityViewModel> { await Service.GetbyIdAsync(result) };
+                }
+            }else if(search.SearchType == Domain.Enums.ESearcType.State)
+            {
+                localityViewModels = await Service.GetILocalityByStateAsync(search.Search); 
+            }
+            else
+            {
+                localityViewModels = await Service.GetLocalityByCityAsync(search.Search);
+            }
+        }
+
+        private async Task HandlerSeachEmpty()
+        {
+            if (string.IsNullOrEmpty(search.Search))
+            {
+                await OnInitializedAsync(); 
+            }
+        }
     }
 }

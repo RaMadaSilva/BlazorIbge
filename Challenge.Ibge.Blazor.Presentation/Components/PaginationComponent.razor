@@ -15,10 +15,10 @@
     </div>
     <form class="row row-cols-lg-auto g-3 align-items-center">
         <div class="col-12">
-            <label class="visually-hidden" for="inlineFormInputGroupUsername">Username</label>
+            <label class="visually-hidden" for="inlineFormInputGroupItem"></label>
             <div class="input-group">
                 <div class="input-group-text">Items Per Page</div>
-                <select type="text" class="form-control" id="inlineFormInputGroupUsername" @onchange="e =>ChangeItemsPerPage(Convert.ToInt32(e.Value))">
+                <select type="text" class="form-control" id="inlineFormInputGroupItem" @onchange="e =>ChangeItemsPerPage(Convert.ToInt32(e.Value))">
                     @for (var i = 10; i <= 50; i += 10)
                     {
                         <option value="@i">@i</option>

@@ -50,31 +50,26 @@ namespace Challenge.Ibge.Blazor.Infra.Repositories
 
         public async Task<IEnumerable<Locality?>> GetByCityAsync(string city)
         {
-            IQueryable<Locality> query = _context.Localities;
             if (String.IsNullOrEmpty(city))
-                return new List<Locality>();
-            query = query.Where(c => c.City!.Contains(city));
+                return new List<Locality>(); 
+
+            IQueryable<Locality> query = _context
+                                            .Localities
+                                            .Where(x => EF.Functions.Like(x.City, $"%{city}%")); 
             return await query.ToListAsync();
         }
 
         public async Task<IEnumerable<Locality?>> GetByStateAsync(string state)
         {
-            IQueryable<Locality> query = _context.Localities;
+            IQueryable<Locality> query = _context
+                                            .Localities
+                                            .Where(x => EF.Functions.Like(x.State, $"%{state}%"));
+
             if (String.IsNullOrEmpty(state))
                 return new List<Locality>();
-            query = query.Where(c => c.State!.Contains(state));
-            return await query.ToListAsync();
-        }
 
-        public async Task<Locality?> GetByIdAsync(string id)
-        {
-            if (String.IsNullOrEmpty(id))
-                return null;
-            var result = await _context.Localities
-                .FirstOrDefaultAsync(c => c.Id.Equals(id));
-            if (result != null)
-                return result;
-            return null;
+            return await query.ToListAsync();
+
         }
     }
 }
