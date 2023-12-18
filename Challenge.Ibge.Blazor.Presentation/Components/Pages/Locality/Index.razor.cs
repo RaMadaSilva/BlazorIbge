@@ -8,6 +8,7 @@ namespace Challenge.Ibge.Blazor.Presentation.Components.Pages.Locality
         private bool IsAutenticated;
         private int currentPage = 1;
         private int itemPerPage = 10;
+        private string? error = null;
 
         private SearchViewModel search = new();
 
@@ -15,14 +16,22 @@ namespace Challenge.Ibge.Blazor.Presentation.Components.Pages.Locality
 
         protected override async Task OnInitializedAsync()
         {
-            var authSate = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-            IsAutenticated = authSate.User.Identity.IsAuthenticated;
+            try
+            {
+                var authSate = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+                IsAutenticated = authSate.User.Identity.IsAuthenticated;
 
-            localityViewModels = await Service.GetAsync();
+                localityViewModels = await Service.GetAsync();
+            }
+            catch (Exception ex)
+            {
+                error = ex.Message;
+            }
         }
 
         private IEnumerable<LocalityViewModel> GetLocalityPaginated()
         {
+
             int start = (currentPage - 1) * itemPerPage;
 
             return localityViewModels.Skip(start).Take(itemPerPage).ToList();
@@ -34,30 +43,52 @@ namespace Challenge.Ibge.Blazor.Presentation.Components.Pages.Locality
 
         private async Task SearchAsync()
         {
-            if (search.SearchType == Domain.Enums.ESearcType.Code)
+            try
             {
-                long result;
-
-                if (long.TryParse(search.Search, out result))
+                if (search.SearchType == Domain.Enums.ESearcType.CodeIBGE)
                 {
+                    long result;
+
+                    if (!long.TryParse(search.Search, out result))
+                    {
+                        error = "deve informar valores inteiros";
+                        return;
+                    }
+
                     localityViewModels = new List<LocalityViewModel> { await Service.GetbyIdAsync(result) };
                 }
-            }else if(search.SearchType == Domain.Enums.ESearcType.State)
-            {
-                localityViewModels = await Service.GetILocalityByStateAsync(search.Search); 
+                else if (search.SearchType == Domain.Enums.ESearcType.State)
+                {
+                    localityViewModels = await Service.GetILocalityByStateAsync(search.Search);
+                }
+                else
+                {
+                    localityViewModels = await Service.GetLocalityByCityAsync(search.Search);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                localityViewModels = await Service.GetLocalityByCityAsync(search.Search);
+                error = ex.Message;
             }
         }
 
         private async Task HandlerSeachEmpty()
         {
-            if (string.IsNullOrEmpty(search.Search))
+            try
             {
-                await OnInitializedAsync(); 
+                if (string.IsNullOrEmpty(search.Search))
+                {
+                    await OnInitializedAsync();
+                }
             }
+            catch (Exception ex)
+            {
+                error = ex.Message; 
+            }
+        }
+        private void RefreshPage()
+        {
+            Navigation.NavigateTo("/locality", forceLoad:true); 
         }
     }
 }

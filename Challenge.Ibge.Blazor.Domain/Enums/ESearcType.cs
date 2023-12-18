@@ -2,7 +2,7 @@
 {
     public enum ESearcType
     {
-        Code = 1,
+        CodeIBGE = 1,
         State = 2,
         City = 3
     }

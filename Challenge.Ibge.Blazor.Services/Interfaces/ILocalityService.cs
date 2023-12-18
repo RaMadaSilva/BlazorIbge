@@ -11,7 +11,5 @@ namespace Challenge.Ibge.Blazor.Applications.Interfaces
         Task UpdateLocalityAsync(LocalityViewModel viewModel); 
         Task<IEnumerable<LocalityViewModel>> GetLocalityByCityAsync(string city); 
         Task<IEnumerable<LocalityViewModel>> GetILocalityByStateAsync(string state);
-
-
     }
 }

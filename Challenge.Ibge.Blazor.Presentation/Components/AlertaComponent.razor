@@ -1,0 +1,21 @@
+﻿@if (!string.IsNullOrEmpty(Message))
+{
+    <div class="alert alert alert-danger" role="alert">
+        <strong>@Message</strong>
+        <button type="button" class="close" @onclick="CloseAlert">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public string Message { get; set; } = string.Empty;
+    [Parameter]
+    public EventCallback<bool> OnClose { get; set; }
+
+    private async Task CloseAlert()
+    {
+        await OnClose.InvokeAsync(true);
+    }
+}
