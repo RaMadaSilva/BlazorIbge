@@ -1,5 +1,5 @@
 ﻿using Challenge.Ibge.Blazor.Domain.Entities;
-using Challenge.Ibge.Blazor.Presentation.ViewModel;
+using Challenge.Ibge.Blazor.Applications.ViewModel;
 
 namespace Challenge.Ibge.Blazor.Applications.Extensions
 {

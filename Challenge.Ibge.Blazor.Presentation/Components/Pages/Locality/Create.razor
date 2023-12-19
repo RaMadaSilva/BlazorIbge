@@ -4,19 +4,31 @@
 @rendermode InteractiveServer
 @attribute [Authorize]
 
-<h1> Create New Locality </h1>
+<h2> Create New Locality </h2>
+<hr />
+
+@if (!string.IsNullOrEmpty(error))
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        @error
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
 <EditForm Model="@Model" OnValidSubmit="SalvarAsync">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
     <div class="mb-3">
-        <label class="form-label"> Acronym of State </label>
+        <label class="form-label"> State </label>
         <InputText @bind-Value="Model.State" class="form-control" />
         <ValidationMessage For="@(() => Model.State)" />
     </div>
 
     <div class="mb-3">
-        <label class="form-label"> Name of City </label>
+        <label class="form-label"> City </label>
         <InputText @bind-Value="Model.City" class="form-control" />
         <ValidationMessage For="@(() => Model.City)" />
     </div>
@@ -29,11 +41,18 @@
 
 @code {
     public LocalityViewModel Model { get; set; } = new();
+    private string? error; 
 
     public async Task SalvarAsync()
     {
-        await Service.SaveAsync(Model);
-        Navigation.NavigateTo("locality");
-    }
+        try
+        {
+            await Service.SaveAsync(Model);
+            Navigation.NavigateTo("locality");
 
+        }catch(Exception ex)
+        {
+            error = ex.Message; 
+        }
+    }
 }

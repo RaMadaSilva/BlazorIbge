@@ -1,0 +1,58 @@
+﻿    <EditForm Model="@Model" FormName="seachComponent" OnSubmit="@OnSeachAsync">
+        <form class="row row-cols-lg-auto g-3 align-items-center">
+            <div class="col-12">
+                <label class="visually-hidden" for="inlineFormInputGroup"></label>
+                <div class="input-group">
+                    <div class="input-group-text">Find by</div>
+                    <InputSelect Model="@Model" @bind-Value="Model.SearchType" class="btn btn-light dropdown-toggle" id="inlineFormInputGroup">
+                        @foreach (var item in Enum.GetValues(typeof(ESearcType)))
+                        {
+                            <option value="@item">@item</option>
+                        }
+                    </InputSelect>
+                </div>
+            </div>
+        </form>
+        <br />
+    <div class="input-group">
+        <InputText class="form-control" @bind-Value="Model.Search" @onblur="EmptySeached" @onkeypress="EmptySeached">
+        </InputText>
+        <div class="input-group-append">
+                @if (string.IsNullOrEmpty(Model.Search))
+                {
+                <button type="submit" class="btn btn-secondary" disabled>
+                        <span class="bi bi-search" />
+                    </button>
+                }
+                else
+                {
+                <button type="submit" class="btn btn-primary">
+                        <span class="bi bi-search" />
+                    </button>
+                }
+            
+            </div>
+        </div>
+    </EditForm>
+
+@code {
+
+    [Parameter]
+    public SearchViewModel Model { get; set; } = new();
+
+    [Parameter]
+    public EventCallback EventSerch { get; set; }
+    [Parameter]
+    public EventCallback SearchEmpty { get; set; }
+
+    private async Task OnSeachAsync()
+    {
+        await EventSerch.InvokeAsync();
+    }
+
+    public async Task EmptySeached()
+    {
+         await SearchEmpty.InvokeAsync();
+         StateHasChanged(); 
+    }
+}

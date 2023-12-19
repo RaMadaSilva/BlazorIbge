@@ -2,18 +2,40 @@
 @inject ILocalityService Service
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @rendermode InteractiveServer
+@inject NavigationManager Navigation
 @attribute [StreamRendering(true)]
 
-<h3>Localities</h3>
-
-@if(IsAutenticated)
+<h2>Localities</h2>
+<hr />
+@if (!string.IsNullOrEmpty(error))
 {
-    <a href="/locality/create" class="btn btn-success">
-        <span class="bi bi-plus-lg"></span>
-        Create
-    </a>
+    <div id="blazor-error-ui" class="alert alert-danger" role="alert">
+        <strong>@error</strong>
+        <button class="btn btn-default" @onclick="RefreshPage">
+            &nbsp;🗙
+        </button>
+    </div>
 }
 
+@if (IsAutenticated)
+{
+    <div class="mb-3">
+        <div class="row">
+            <div class="col-9">
+                <br />
+                <a href="/locality/create" class="btn btn-success btn-lg">
+                    <span class="bi bi-plus-lg"></span>
+                    Create
+                </a>
+            </div>
+            <div class="col">
+                <SearchComponent Model="search"
+                                 EventSerch="@SearchAsync"
+                                 SearchEmpty="@HandlerSeachEmpty" />
+            </div>
+        </div>
+    </div>
+}
 
 @if (!localityViewModels.Any())
 {
@@ -29,20 +51,6 @@ else
                 <th>City</th>
                 <th></th>
             </tr>
-            <tr>
-
-                <th>
-                    <InputNumber class="form-control" @bind-Value="id" />
-                </th>
-                <th>
-                    <InputText class="form-control" @bind-Value="state" />
-                </th>
-                <th>
-                    <InputText class="form-control" @bind-Value="city" />
-                </th>
-                <th>
-                </th>
-            </tr>
         </thead>
         <tbody>
             @foreach (var Locality in GetLocalityPaginated())
@@ -53,7 +61,7 @@ else
                     <td>@Locality.City</td>
                     <td>
                         @if (IsAutenticated)
-                            {
+                        {
                             <a href="/locality/edit/@Locality.Id" class="btn btn-primary">
                                 <span class="bi bi-pencil"></span>
                             </a>
@@ -75,11 +83,10 @@ else
         </tbody>
     </table>
     <div>
-        <PaginationComponent 
-            CurrentPage="@currentPage"
-            ItemsPerPage="@itemPerPage"
-            ItemsPerPageChanged="@HandlerItemsPerPageChenged"
-            PageChanged="@HandlerPageChanged"
-            TotalItems="@localityViewModels.Count()"/>
+        <PaginationComponent CurrentPage="@currentPage"
+                             ItemsPerPage="@itemPerPage"
+                             ItemsPerPageChanged="@HandlerItemsPerPageChenged"
+                             PageChanged="@HandlerPageChanged"
+                             TotalItems="@localityViewModels.Count()" />
     </div>
 }

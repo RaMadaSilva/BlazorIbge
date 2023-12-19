@@ -52,6 +52,7 @@
     <Content Remove="C:\Users\Raul da Silva\.nuget\packages\bootstrap\5.3.2\contentFiles\any\any\wwwroot\js\bootstrap.js.map" />
     <Content Remove="C:\Users\Raul da Silva\.nuget\packages\bootstrap\5.3.2\contentFiles\any\any\wwwroot\js\bootstrap.min.js" />
     <Content Remove="C:\Users\Raul da Silva\.nuget\packages\bootstrap\5.3.2\contentFiles\any\any\wwwroot\js\bootstrap.min.js.map" />
+    <Content Remove="Components\AlertaComponent.razor" />
   </ItemGroup>
 
   <ItemGroup>
@@ -64,6 +65,18 @@
   <ItemGroup>
     <ProjectReference Include="..\Challenge.Ibge.Blazor.Infra\Challenge.Ibge.Blazor.Infra.csproj" />
     <ProjectReference Include="..\Challenge.Ibge.Blazor.Services\Challenge.Ibge.Blazor.Applications.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Components\AlertaComponent.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Components\AlertaComponent.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Components\AlertaComponent.razor" />
   </ItemGroup>
 
 </Project>
