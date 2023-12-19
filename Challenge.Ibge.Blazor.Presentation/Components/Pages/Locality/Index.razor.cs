@@ -54,16 +54,36 @@ namespace Challenge.Ibge.Blazor.Presentation.Components.Pages.Locality
                         error = "deve informar valores inteiros";
                         return;
                     }
+                    var locality = await Service.GetbyIdAsync(result); 
 
-                    localityViewModels = new List<LocalityViewModel> { await Service.GetbyIdAsync(result) };
+                    if(locality is null)
+                    {
+                        validation(); 
+                    }
+
+                    localityViewModels = new List<LocalityViewModel> {locality};
                 }
                 else if (search.SearchType == Domain.Enums.ESearcType.State)
                 {
-                    localityViewModels = await Service.GetILocalityByStateAsync(search.Search);
+                    var localities = await Service.GetILocalityByStateAsync(search.Search);
+
+                    if (!localities.Any()) 
+                    {
+                        validation();
+                        return; 
+                    }
+                    localityViewModels = localities; 
                 }
                 else
                 {
-                    localityViewModels = await Service.GetLocalityByCityAsync(search.Search);
+                    var localities = await Service.GetLocalityByCityAsync(search.Search);
+                    if (!localities.Any())
+                    {
+                        validation();
+                        return; 
+                    }
+                       
+                    localityViewModels = localities; 
                 }
             }
             catch (Exception ex)
@@ -89,6 +109,11 @@ namespace Challenge.Ibge.Blazor.Presentation.Components.Pages.Locality
         private void RefreshPage()
         {
             Navigation.NavigateTo("/locality", forceLoad:true); 
+        }
+        private void validation()
+        {
+            error = $"Not found";
+            localityViewModels = Enumerable.Empty<LocalityViewModel>();
         }
     }
 }

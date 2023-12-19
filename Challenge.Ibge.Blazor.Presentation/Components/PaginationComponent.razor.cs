@@ -19,7 +19,6 @@ namespace Challenge.Ibge.Blazor.Presentation.Components
 
         private async Task ChangePage(int page)
         {
-            Console.WriteLine($"ChangePage: {page}, CurrentPage: {CurrentPage}, NumberPages: {NumberPages}");
             if (page >= 1 && page <= NumberPages && page != CurrentPage)
             {
                 CurrentPage = page;
