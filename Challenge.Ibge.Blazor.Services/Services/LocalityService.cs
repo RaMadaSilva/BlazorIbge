@@ -2,8 +2,9 @@
 using Challenge.Ibge.Blazor.Applications.Interfaces;
 using Challenge.Ibge.Blazor.Domain.Interfaces;
 using Challenge.Ibge.Blazor.Applications.ViewModel;
+using System.Xml.XPath;
 
-namespace Challenge.Ibge.Blazor.Applications.Services; 
+namespace Challenge.Ibge.Blazor.Applications.Services;
 
 public class LocalityService : ILocalityService
 {
@@ -20,10 +21,13 @@ public class LocalityService : ILocalityService
         return result.ToListViewModel();
     }
 
-    public async Task<LocalityViewModel> GetbyIdAsync(long id)
+    public async Task<LocalityViewModel?> GetbyIdAsync(long id)
     {
 
-        return await _repository.GetByIdAsync(id) ?? new LocalityViewModel();
+        var result = await _repository.GetByIdAsync(id);
+        if (result is null)
+            return null;
+        return result;
     }
 
     public async Task SaveAsync(LocalityViewModel viewModel)
