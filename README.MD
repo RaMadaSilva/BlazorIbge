@@ -1,8 +1,10 @@
-🌍 Localities of Brazil
+# 🌍 Localities of Brazil
+
 A Localities of Brazil é uma plataforma que parte de um desafio de desenvolvimento e visa criar um projeto utilizando Blazor com funcionalidades de autenticação, cadastro, edição, visualização, deleção e pesquisa de localidades do território brasileiro. 
 
 
-🚀 Funcionalidades
+## 🚀 Funcionalidades
+
 Cadastro de usuarios e Autenticação: O cadastro dos usuários e a autenticação foi realizada utilizando o identity.
 
 Cadastro de localidades: Os usuários logados podem realizar o cadastro de uma nova localidade na plataforma informando o State e City.
@@ -22,7 +24,8 @@ Items por página: Caso queira alterar a quantidade de localidades listadas por 
 Total de localidades: Ao acessar a página de localities é informado a quantidade total de items que foram carregados e separados por páginação.
 
 
-💫 Tecnologias Utilizadas
+## 💫 Tecnologias Utilizadas
+
 Blazor .Net 8:  Versão do Framework .NET para desenvolvimento de aplicações.
 
 Entity Framework core: tecnologia de ORM para o relacionamenteo entre objectos e entidades do banco de dados, usamos tambem a abordagem Code First para gerar as tabelas apartir das classes de entidaide.
@@ -36,7 +39,8 @@ Clean Architecture: Arquitetura Limpa permite que as mudanças tenham impacto is
 Link da plataforma Publicada: 🔗
 
 
-📦 Como Usar
+## 📦 Como Usar
+
 Clone este repositório.
 
 Configure o ambiente de desenvolvimento e as dependências necessárias.
@@ -48,7 +52,7 @@ No Package Manager Console execute a migration com o comando update-database.
 Execute a aplicação.
 
 
-🤝 Contribuição
+## 🤝 Contribuição
 Sinta-se à vontade para contribuir com melhorias, correções de bugs e novas funcionalidades. Para contribuir, siga os passos:
 
 Faça um fork deste repositório.
