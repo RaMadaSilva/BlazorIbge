@@ -1,5 +1,6 @@
 # 🌍 Localities of Brazil
 
+
 A Localities of Brazil é uma plataforma que parte de um desafio de desenvolvimento e visa criar um projeto utilizando Blazor com funcionalidades de autenticação, cadastro, edição, visualização, deleção e pesquisa de localidades do território brasileiro. 
 
 
@@ -66,3 +67,9 @@ Faça commit das alterações: git commit -m 'Adicione sua mensagem aqui'.
 Envie as alterações para seu fork: git push origin feature/sua-feature.
 
 Crie um pull request neste repositório.
+
+## Trabalho Realizado por: 
+
+https://github.com/RaMadaSilva
+https://github.com/paulopimenta
+https://github.com/Renanpedro
