@@ -14,9 +14,7 @@ namespace Challenge.Ibge.Blazor.Presentation.Components
         public EventCallback<int> PageChanged { get; set; }
         [Parameter]
         public EventCallback<int> ItemsPerPageChanged { get; set; }
-
         private int NumberPages => (int)Math.Ceiling(TotalItems / (double)ItemsPerPage);
-
         private async Task ChangePage(int page)
         {
             if (page >= 1 && page <= NumberPages && page != CurrentPage)

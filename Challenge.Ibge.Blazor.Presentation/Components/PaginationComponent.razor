@@ -1,13 +1,26 @@
 ﻿<div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
     <div class="btn-group" role="group" aria-label="First group">
+
         <button type="button" class="btn btn-secondary" disabled="@(CurrentPage==1)" @onclick="@(()=>ChangePage(CurrentPage-1))">
             Previous
         </button>
-        @foreach (var i in Enumerable.Range(1, NumberPages))
+
+        @if (CurrentPage > 4)
         {
-            <button class="@(CurrentPage==i? "selected":"") btn btn-secondary" @onclick="@(()=>ChangePage(i))">
+            <button class="btn btn-secondary" @onclick="() => ChangePage(1)">1</button>
+            <button class="btn btn-secondary" disabled>...</button>
+        }
+
+        @for (int i = Math.Max(1, CurrentPage-2);i<=Math.Min(NumberPages, CurrentPage+2); i++)
+        {
+            <button class="@(i==CurrentPage? "selected":"") btn btn-secondary" @onclick="@(()=>ChangePage(i))">
                 @i
             </button>
+        }
+        @if (CurrentPage + 2 < NumberPages - 1)
+        {
+            <button class="btn btn-secondary" disabled>...</button>
+            <button class="btn btn-secondary" @onclick="() => ChangePage(NumberPages)">@NumberPages</button>
         }
         <button type="button" class="btn btn-secondary" disabled="@(CurrentPage==NumberPages)" @onclick="@(()=>ChangePage(CurrentPage +1))">
             Next

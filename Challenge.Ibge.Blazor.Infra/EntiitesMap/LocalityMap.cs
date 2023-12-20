@@ -34,7 +34,6 @@ namespace Challenge.Ibge.Blazor.Infra.EntiitesMap
                 .HasColumnName("DateCreate")
                 .HasColumnType("DateTime2")
                 .HasDefaultValueSql("GETDATE()"); 
-
         }
     }
 }
