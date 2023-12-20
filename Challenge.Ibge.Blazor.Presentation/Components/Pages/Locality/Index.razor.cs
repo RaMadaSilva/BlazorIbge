@@ -58,7 +58,8 @@ namespace Challenge.Ibge.Blazor.Presentation.Components.Pages.Locality
 
                     if(locality is null)
                     {
-                        validation(); 
+                        validation();
+                        return; 
                     }
 
                     localityViewModels = new List<LocalityViewModel> {locality};
