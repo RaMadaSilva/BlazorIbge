@@ -33,8 +33,6 @@ Entity Framework core: tecnologia de ORM para o relacionamenteo entre objectos e
 
 SQL Server: Sistema de Gestão de Base de Dados SGBD da Microsoft escolhido para o respectivo projecto.
 
-CQRS: Padrão arquitectural com o proposito de separar as responsabilidade entre comandos e consultas (Command Query Responsability Segregation).
-
 Clean Architecture: Arquitetura Limpa permite que as mudanças tenham impacto isolado e permite que o sistema seja facilmente estendido e mantido.
 
 Link da plataforma Publicada: 🔗
