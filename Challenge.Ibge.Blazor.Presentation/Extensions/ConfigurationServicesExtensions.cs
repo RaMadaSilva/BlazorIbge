@@ -49,7 +49,7 @@ namespace Challenge.Ibge.Blazor.Presentation.Extensions
             var connectionString = configuration.GetConnectionString("DefaultConnection")
             ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(connectionString));
+                options.UseSqlite(connectionString));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             return services;

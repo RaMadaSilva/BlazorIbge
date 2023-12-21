@@ -2,7 +2,7 @@
 {
     public  class LocalityRemoved
     {
-        public LocalityRemoved(long id, string city, string state, DateTime dateCreate)
+        public LocalityRemoved(int id, string city, string state, DateTime dateCreate)
         {
             Id = id;
             City = city;
@@ -11,7 +11,7 @@
             DateRemoved = DateTime.UtcNow;
         }
 
-        public long Id { get; private set; }
+        public int Id { get; private set; }
         public string City { get; private set; }
         public string State { get; private set; }
         public DateTime DateCreate { get; private set; }
