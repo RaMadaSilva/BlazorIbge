@@ -6,7 +6,7 @@
         {
             City = city;
             State = state.ToUpper();
-            DateCreate = DateTime.Now;
+            DateCreate = DateTime.UtcNow;
         }
 
         public int Id { get; private set; }

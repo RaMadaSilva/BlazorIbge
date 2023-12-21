@@ -15,31 +15,24 @@ namespace Challenge.Ibge.Blazor.Infra.EntiitesMap
             builder.Property(property => property.Id)
                 .IsRequired()
                 .HasColumnName("Id")
-                .HasColumnType("BIGINT")
-                .ValueGeneratedNever();
+                .UseIdentityAlwaysColumn();
 
             builder.Property(property => property.City)
                 .IsRequired()
-                .HasColumnName("City")
-                .HasColumnType("NVARCHAR")
-                .HasMaxLength(500);
+                .HasColumnName("City"); 
 
             builder.Property(property => property.State)
                 .IsRequired()
-                .HasColumnName("State")
-                .HasColumnType("NVARCHAR")
-                .HasMaxLength(5);
+                .HasColumnName("State");
 
             builder.Property(property => property.DateCreate)
                 .IsRequired()
-                .HasColumnName("DateCreate")
-                .HasColumnType("DateTime2"); 
+                .HasColumnName("DateCreate"); 
 
             builder.Property(property => property.DateRemoved)
                 .IsRequired()
                 .HasColumnName("DateRemoved")
-                .HasColumnType("DateTime2")
-                .HasDefaultValueSql("GETDATE()");
+                .HasDefaultValueSql("CURRENT_DATE");
         }
     }
 }

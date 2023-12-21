@@ -13,7 +13,7 @@ namespace Challenge.Ibge.Blazor.Infra.EntiitesMap
             builder.HasKey(property => property.Id);
             builder.Property(property => property.Id)
                 .IsRequired()
-                .ValueGeneratedOnAdd()
+                .UseIdentityAlwaysColumn()
                 .HasColumnName("Id"); 
 
             builder.Property(property => property.City)
@@ -27,8 +27,7 @@ namespace Challenge.Ibge.Blazor.Infra.EntiitesMap
             builder.Property(property => property.DateCreate)
                 .IsRequired()
                 .HasColumnName("DateCreate")
-                .HasColumnType("DateTime2")
-                .HasDefaultValueSql("DATETIME('now')"); 
+                .HasDefaultValueSql("CURRENT_DATE"); 
         }
     }
 }
