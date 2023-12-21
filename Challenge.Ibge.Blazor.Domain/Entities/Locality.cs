@@ -9,7 +9,7 @@
             DateCreate = DateTime.Now;
         }
 
-        public long Id { get; private set; }
+        public int Id { get; private set; }
         public string City { get; private set; }
         public string State { get; private set; }
         public DateTime DateCreate { get;  private set; }
