@@ -41,15 +41,18 @@ namespace Challenge.Ibge.Blazor.Presentation.Extensions
 
             services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSender>();
 
-            return services; 
+            return services;
         }
 
         public static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration)
         {
-            var connectionString = configuration.GetConnectionString("DefaultConnection")
-            ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+
+            var connectionString = configuration
+                .GetConnectionString("DefaultConnection")
+                ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(connectionString));
+                            options.UseNpgsql(connectionString));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             return services;
@@ -58,10 +61,10 @@ namespace Challenge.Ibge.Blazor.Presentation.Extensions
         public static IServiceCollection AddDependenceInjection(this IServiceCollection services)
         {
             services.AddScoped<ILocalityService, LocalityService>();
-            services.AddScoped<ILocalityRepository, LocalityRepository>(); 
+            services.AddScoped<ILocalityRepository, LocalityRepository>();
             services.AddScoped<ILocalityRemovedRepository, LocalityRemovedRepository>();
 
-            return services; 
+            return services;
         }
     }
 }
